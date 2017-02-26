@@ -33,7 +33,7 @@
     "@types/core-js": "^0.9.35",
     "@types/jasmine": "^2.5.43",
     "jasmine-core": "^2.5.2",
-    "karma": "^1.5.0",
+    "karma": "~1.4.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.1.0",
