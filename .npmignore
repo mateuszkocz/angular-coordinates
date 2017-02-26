@@ -1,0 +1,13 @@
+*.ts
+!*.d.ts
+*.spec.*
+src/ngFactory
+
+.idea
+coverage
+.editorconfig
+.travis.yml
+karma.conf.js
+lcov.info
+tsconfig.json
+tslint.json
