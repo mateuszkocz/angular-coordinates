@@ -1,4 +1,4 @@
-export const enum Direction {
+export enum Direction {
   Latitude = 1,
   Longitude
 }

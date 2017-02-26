@@ -1,4 +1,4 @@
-export const enum TransformationType {
+export enum TransformationType {
   ToDigit = 1,
   ToDegrees
 }
