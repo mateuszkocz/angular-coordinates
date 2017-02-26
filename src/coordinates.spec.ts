@@ -10,7 +10,7 @@ describe('Coordinates library', () => {
 
     @Component({
       template: `{{ value | coordinates:conversionType:direction}} |
-      <coordinates-display [value]="value" [type]="conversionType" [direction]="direction"></coordinates-display>`
+      <geo-coordinates [value]="value" [type]="conversionType" [direction]="direction"></geo-coordinates>`
     })
     class TestComponent {
       value: string | number | null = null

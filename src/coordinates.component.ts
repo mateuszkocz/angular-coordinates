@@ -4,7 +4,7 @@ import {getValidTransformationType} from './getTransformationType'
 import {Direction} from './direction.enum'
 
 @Component({
-  selector: 'coordinates-display',
+  selector: 'geo-coordinates',
   template: '{{ value | coordinates:type:direction }}'
 })
 export class CoordinatesComponent {
