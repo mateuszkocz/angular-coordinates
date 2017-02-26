@@ -10,11 +10,19 @@
     "build": "./node_modules/typescript/bin/tsc",
     "prepublish": "npm run build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "angular",
+    "geolocation",
+    "coordinates"
+  ],
+  "author": "Mateusz Kocz",
   "license": "MIT",
   "peerDependencies": {
     "@angular/core": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:mateuszkocz/angular-coordinates.git"
   },
   "devDependencies": {
     "@angular/common": "^2.0.0",
