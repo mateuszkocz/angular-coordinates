@@ -1,4 +1,4 @@
 export const enum TransformationType {
-  ToDigit,
+  ToDigit = 1,
   ToDegrees
 }
