@@ -1,7 +1,7 @@
 # Angular directive for matching styles to background color depending on it's contrast
-[![Build Status](https://travis-ci.org/angular-coordinates.svg?branch=master)](https://travis-ci.org/angular-coordinates)
-[![Code Climate](https://codeclimate.com/github/angular-coordinates/badges/gpa.svg)](https://codeclimate.com/github/angular-coordinates)
-[![Test Coverage](https://codeclimate.com/github/angular-coordinates/badges/coverage.svg)](https://codeclimate.com/github/angular-coordinates/coverage)
+[![Build Status](https://travis-ci.org/mateuszkocz/angular-coordinates.svg?branch=master)](https://travis-ci.org/mateuszkocz/angular-coordinates)
+[![Code Climate](https://codeclimate.com/github/mateuszkocz/angular-coordinates/badges/gpa.svg)](https://codeclimate.com/github/mateuszkocz/angular-coordinates)
+[![Test Coverage](https://codeclimate.com/github/mateuszkocz/angular-coordinates/badges/coverage.svg)](https://codeclimate.com/github/mateuszkocz/angular-coordinates/coverage)
 
 Angular (2+) library to parse and display geographical coordinates.
 
