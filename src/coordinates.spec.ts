@@ -1,22 +1,21 @@
 import {Component, DebugElement} from '@angular/core'
 import {TestBed, ComponentFixture} from '@angular/core/testing'
-import {CoordinatesPipe} from './coordinates.pipe'
-import {CoordinatesComponent} from './coordinates.component'
-import {CoordinatesService} from './coordinates.service'
 import {TransformationType} from './transformation-type.enum'
 import {CoordinatesModule} from './coordinates.module'
+import {Direction} from './direction.enum'
 
 describe('Coordinates library', () => {
   describe('Component and pipe', () => {
     type testTransformationTypes = TransformationType | null | 'invalid'
 
     @Component({
-      template: `{{ value | coordinates:conversionType}} |
-      <coordinates-display [value]="value" [type]="conversionType"></coordinates-display>`
+      template: `{{ value | coordinates:conversionType:direction}} |
+      <coordinates-display [value]="value" [type]="conversionType" [direction]="direction"></coordinates-display>`
     })
     class TestComponent {
       value: string | number | null = null
       conversionType: testTransformationTypes = null
+      direction: Direction | undefined
     }
 
     let fixture: ComponentFixture<TestComponent>
@@ -42,6 +41,10 @@ describe('Coordinates library', () => {
     }
     const setType = (type: testTransformationTypes) => {
       component.conversionType = type
+      fixture.detectChanges()
+    }
+    const setDirection = (direction: Direction) => {
+      component.direction = direction
       fixture.detectChanges()
     }
 
@@ -120,6 +123,21 @@ describe('Coordinates library', () => {
       expect(getContent()).toBe('20.123')
       setValue(-30.56789)
       expect(getContent()).toBe('-30.56789')
+    })
+
+    it('should optionally display a direction when used with "to degrees" transformation', () => {
+      setValue(10)
+      setDirection(Direction.Latitude)
+      expect(getContent()).toBe(`10°0'0" N`)
+      setValue(-20)
+      setDirection(Direction.Latitude)
+      expect(getContent()).toBe(`20°0'0" S`)
+      setValue(30)
+      setDirection(Direction.Longitude)
+      expect(getContent()).toBe(`30°0'0" E`)
+      setValue(-40)
+      setDirection(Direction.Longitude)
+      expect(getContent()).toBe(`40°0'0" W`)
     })
   })
 })

@@ -1,14 +1,18 @@
 import {Component, Input} from '@angular/core'
 import {TransformationType} from './transformation-type.enum'
 import {getValidTransformationType} from './getTransformationType'
+import {Direction} from './direction.enum'
 
 @Component({
   selector: 'coordinates-display',
-  template: '{{ value | coordinates:type }}'
+  template: '{{ value | coordinates:type:direction }}'
 })
 export class CoordinatesComponent {
   @Input()
   value: string | number | null
+
+  @Input()
+  direction: Direction | undefined
 
   @Input()
   set type(type: TransformationType) {
