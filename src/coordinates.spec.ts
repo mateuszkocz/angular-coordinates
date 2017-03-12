@@ -184,15 +184,21 @@ describe('Coordinates library', () => {
     })
 
     it('should validate degree values depending on the direction if provided', () => {
-      // TODO: Should handle NSWE directions.
       expect(service.isValidDegree(`180°0'0"`, Direction.Longitude)).toBe(true)
-      // expect(service.isValidDigit(-180, Direction.Longitude)).toBe(true)
       expect(service.isValidDegree(`181°0'0"`, Direction.Longitude)).toBe(false)
-      // expect(service.isValidDigit(-181, Direction.Longitude)).toBe(false)
       expect(service.isValidDegree(`90°0'0"`, Direction.Latitude)).toBe(true)
-      // expect(service.isValidDigit(-90, Direction.Latitude)).toBe(true)
       expect(service.isValidDegree(`91°0'0"`, Direction.Latitude)).toBe(false)
-      // expect(service.isValidDigit(-91, Direction.Latitude)).toBe(false)
+    })
+
+    it('should consider added direction as a valid value', () => {
+      expect(service.isValidDegree(`180°0'0" W`, Direction.Longitude)).toBe(true)
+      expect(service.isValidDegree(`180°0'0" E`, Direction.Longitude)).toBe(true)
+      expect(service.isValidDegree(`90°0'0" N`, Direction.Latitude)).toBe(true)
+      expect(service.isValidDegree(`90°0'0" S`, Direction.Latitude)).toBe(true)
+      expect(service.isValidDegree(`180°0'0" N`, Direction.Latitude)).toBe(false)
+      expect(service.isValidDegree(`180°0'0" S`, Direction.Latitude)).toBe(false)
+      expect(service.isValidDegree(`200°0'0" W`, Direction.Latitude)).toBe(false)
+      expect(service.isValidDegree(`200°0'0" E`, Direction.Latitude)).toBe(false)
     })
 
     it('should validate digit values', () => {

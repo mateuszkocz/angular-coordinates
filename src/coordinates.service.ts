@@ -74,7 +74,7 @@ export class CoordinatesService {
   /* tslint:enable */
 
   private isValidDegreeFormat(value: string): boolean {
-    return /^\d+°(\d+'(\d+")?)?$/.test(value)
+    return /^\d+°(\d+'(\d+")?)?(\s[NSWE])?$/.test(value)
   }
 
   private transformNumberToDegrees(value: number): string {
