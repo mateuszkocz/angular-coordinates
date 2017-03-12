@@ -1,27 +1,37 @@
 import {Component, DebugElement} from '@angular/core'
-import {TestBed, ComponentFixture} from '@angular/core/testing'
+import {TestBed, ComponentFixture, inject} from '@angular/core/testing'
 import {TransformationType} from './transformation-type.enum'
 import {CoordinatesModule} from './coordinates.module'
 import {Direction} from './direction.enum'
+import {CoordinatesService} from './coordinates.service'
 
 describe('Coordinates library', () => {
+  let fixture: ComponentFixture<TestComponent>
+  let component: TestComponent
+  let debugElement: DebugElement
+  type testTransformationTypes = TransformationType | null | 'invalid'
+
+  // Test component.
+  @Component({
+    template: `{{ value | coordinates:conversionType:direction}} |
+    <geo-coordinates [value]="value" [type]="conversionType" [direction]="direction"></geo-coordinates>`
+  })
+  class TestComponent {
+    value: string | number | null = null
+    conversionType: testTransformationTypes = null
+    direction: Direction | undefined
+  }
+
+  beforeEach(() => {
+    fixture = TestBed.configureTestingModule({
+      imports: [CoordinatesModule],
+      declarations: [TestComponent]
+    }).createComponent(TestComponent)
+    component = fixture.componentInstance
+    debugElement = fixture.debugElement
+  })
+
   describe('Component and pipe', () => {
-    type testTransformationTypes = TransformationType | null | 'invalid'
-
-    @Component({
-      template: `{{ value | coordinates:conversionType:direction}} |
-      <geo-coordinates [value]="value" [type]="conversionType" [direction]="direction"></geo-coordinates>`
-    })
-    class TestComponent {
-      value: string | number | null = null
-      conversionType: testTransformationTypes = null
-      direction: Direction | undefined
-    }
-
-    let fixture: ComponentFixture<TestComponent>
-    let component: TestComponent
-    let debugElement: DebugElement
-
     const getContent = () => {
       const content = debugElement.nativeElement.textContent
       const parts = content.split('|').map((part: string) => part.trim())
@@ -47,15 +57,6 @@ describe('Coordinates library', () => {
       component.direction = direction
       fixture.detectChanges()
     }
-
-    beforeEach(() => {
-      fixture = TestBed.configureTestingModule({
-        imports: [CoordinatesModule],
-        declarations: [TestComponent]
-      }).createComponent(TestComponent)
-      component = fixture.componentInstance
-      debugElement = fixture.debugElement
-    })
 
     it('should display an empty element when no value is provided', () => {
       fixture.detectChanges()
@@ -138,6 +139,75 @@ describe('Coordinates library', () => {
       setValue(-40)
       setDirection(Direction.Longitude)
       expect(getContent()).toBe(`40°0'0" W`)
+    })
+
+    it('should not display invalid values', () => {
+      // ...
+    })
+  })
+
+  // Mostly covered by the "Component and pipe" suit.
+  describe('Service', () => {
+    let service: CoordinatesService
+    beforeEach(inject([CoordinatesService], (coordinatesService: CoordinatesService) => {
+      service = coordinatesService
+    }))
+
+    it('should validate degree values', () => {
+      expect(service.isValidDegree(`40°0'0"`)).toBe(true)
+      expect(service.isValidDegree(`40°`)).toBe(true)
+      expect(service.isValidDegree(`40°0'`)).toBe(true)
+      expect(service.isValidDegree(`0°0'0"`)).toBe(true)
+      expect(service.isValidDegree(`180°0'0"`)).toBe(true)
+      expect(service.isValidDegree(40)).toBe(false)
+      expect(service.isValidDegree(`40°błąd'`)).toBe(false)
+      expect(service.isValidDegree(`180°1'0"`)).toBe(false)
+      expect(service.isValidDegree(`40°0"`)).toBe(false)
+      expect(service.isValidDegree(`181°0'0"`)).toBe(false)
+      expect(service.isValidDegree(`0°60'0"`)).toBe(false)
+      expect(service.isValidDegree(`0°0'60"`)).toBe(false)
+      expect(service.isValidDegree(`0°0'90"`)).toBe(false)
+      expect(service.isValidDegree(`0°82'90"`)).toBe(false)
+      expect(service.isValidDegree(`niepoprawny`)).toBe(false)
+    })
+
+    it('should validate degree values depending on the direction if provided', () => {
+      // TODO: Should handle NSWE directions.
+      expect(service.isValidDegree(`180°0'0"`, Direction.Longitude)).toBe(true)
+      // expect(service.isValidDigit(-180, Direction.Longitude)).toBe(true)
+      expect(service.isValidDegree(`181°0'0"`, Direction.Longitude)).toBe(false)
+      // expect(service.isValidDigit(-181, Direction.Longitude)).toBe(false)
+      expect(service.isValidDegree(`90°0'0"`, Direction.Latitude)).toBe(true)
+      // expect(service.isValidDigit(-90, Direction.Latitude)).toBe(true)
+      expect(service.isValidDegree(`91°0'0"`, Direction.Latitude)).toBe(false)
+      // expect(service.isValidDigit(-91, Direction.Latitude)).toBe(false)
+    })
+
+    it('should validate digit values', () => {
+      expect(service.isValidDigit(0)).toBe(true)
+      expect(service.isValidDigit(10)).toBe(true)
+      expect(service.isValidDigit(-10)).toBe(true)
+      expect(service.isValidDigit(10.234523)).toBe(true)
+      expect(service.isValidDigit(10.9999)).toBe(true)
+      expect(service.isValidDigit(180)).toBe(true)
+      expect(service.isValidDigit(-180)).toBe(true)
+      expect(service.isValidDigit('10')).toBe(true)
+      expect(service.isValidDigit('10.9999')).toBe(true)
+      expect(service.isValidDigit(NaN)).toBe(false)
+      expect(service.isValidDigit('łańcuch')).toBe(false)
+      expect(service.isValidDigit(-181)).toBe(false)
+      expect(service.isValidDigit(181)).toBe(false)
+    })
+
+    it('should validate digit values depending on the direction if provided', () => {
+      expect(service.isValidDigit(180, Direction.Longitude)).toBe(true)
+      expect(service.isValidDigit(-180, Direction.Longitude)).toBe(true)
+      expect(service.isValidDigit(181, Direction.Longitude)).toBe(false)
+      expect(service.isValidDigit(-181, Direction.Longitude)).toBe(false)
+      expect(service.isValidDigit(90, Direction.Latitude)).toBe(true)
+      expect(service.isValidDigit(-90, Direction.Latitude)).toBe(true)
+      expect(service.isValidDigit(91, Direction.Latitude)).toBe(false)
+      expect(service.isValidDigit(-91, Direction.Latitude)).toBe(false)
     })
   })
 })

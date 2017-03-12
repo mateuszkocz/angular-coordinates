@@ -14,5 +14,4 @@ export class CoordinatesPipe implements PipeTransform {
   transform(value: string | number | null, type?: TransformationType, direction?: Direction): string | number {
     return this.coordinatesService.transform(value, getValidTransformationType(type), direction)
   }
-
 }
