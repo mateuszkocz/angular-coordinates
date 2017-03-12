@@ -96,7 +96,11 @@ export class CoordinatesService {
   }
 
   private transformDegreesToNumber(value: string): number {
-    return this.sumDegreeValues(this.extractValues(value))
+    return this.sumDegreeValues(this.extractValues(value)) * ( this.isMinusHemisphere(value) ? -1 : 1)
+  }
+
+  private isMinusHemisphere(value: string): boolean {
+    return /[SW]$/.test(value)
   }
 
   private sumDegreeValues(values: degreeValues): number {

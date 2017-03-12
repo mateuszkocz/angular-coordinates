@@ -116,6 +116,18 @@ describe('Coordinates library', () => {
       expect(getContent()).toBe('20.175')
     })
 
+    it('should handle geographical direction when transforming from degrees to digits', () => {
+      setType(TransformationType.ToDigit)
+      setValue(`10°0'0" N`)
+      expect(getContent()).toBe('10')
+      setValue(`10°0'0" S`)
+      expect(getContent()).toBe('-10')
+      setValue(`10°0'0" E`)
+      expect(getContent()).toBe('10')
+      setValue(`10°0'0" W`)
+      expect(getContent()).toBe('-10')
+    })
+
     it('should display a number when "to digit" transformation is set and the number was provided', () => {
       setType(TransformationType.ToDigit)
       setValue(10)
