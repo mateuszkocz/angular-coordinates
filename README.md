@@ -13,15 +13,15 @@ npm install angular-coordinates
 
 ## Usage
 ### Component
-```
+```html
 <geo-coordinates [value]="10" [direction]="Direction.Latitude"></geo-coordinates>
 
-// Outcome
-`10°0'0" N`
+<!-- Outcome -->
+10°0'0" N
 ```
 
 ### Pipe
-```
+```ts
 @Component({
   template: '{{ value | coordinates:TransformationType.toDegree:Direction.Latitude }}'
 })
@@ -34,7 +34,7 @@ class MyComponent {
 ```
 
 ### Service
-```
+```ts
 @Component({
   template: ''
 })
