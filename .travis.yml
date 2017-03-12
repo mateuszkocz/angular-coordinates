@@ -3,6 +3,8 @@ sudo: false
 node_js:
 - '6'
 
+install: npm install
+
 git:
   depth: 5
 
