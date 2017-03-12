@@ -7,21 +7,21 @@ export class CoordinatesService {
   transform(value: string | number | null, transformationType: TransformationType, direction?: Direction): string
     | number {
 
-    if (!value || !transformationType) {
+    if (!transformationType || !value && value !== 0) {
       return ''
     } else if (transformationType === TransformationType.ToDegrees) {
       return this.transformToDegrees(value, direction)
     } else {
-      const potentialNumber = Number(value)
-      if (!Number.isNaN(potentialNumber)) {
-        return potentialNumber
-      }
-      return String(this.transformToDigit(value as string))
+      return this.transformToDigit(value)
     }
   }
 
-  transformToDigit(value: string): number {
-    return this.transformDegreesToNumber(value)
+  transformToDigit(value: string | number): number {
+    const potentialNumber = Number(value)
+    if (!Number.isNaN(potentialNumber)) {
+      return potentialNumber
+    }
+    return this.transformDegreesToNumber(value as string)
   }
 
   transformToDegrees(value: string | number, direction?: Direction): string {
@@ -40,7 +40,7 @@ export class CoordinatesService {
     if (typeof value !== 'string' || !this.isValidDegreeFormat(value)) {
       return false
     }
-    const values = this.extractValues(value)
+    const values = this.extractValuesFromDegrees(value)
     // Minutes and seconds can't exceed [0,60) boundaries.
     const inBoundary = (val: number) => val >= 0 && val < 60
     if (!inBoundary(values[1]) || !inBoundary(values[2])) {
@@ -96,7 +96,7 @@ export class CoordinatesService {
   }
 
   private transformDegreesToNumber(value: string): number {
-    return this.sumDegreeValues(this.extractValues(value)) * ( this.isMinusHemisphere(value) ? -1 : 1)
+    return this.sumDegreeValues(this.extractValuesFromDegrees(value)) * (this.isMinusHemisphere(value) ? -1 : 1)
   }
 
   private isMinusHemisphere(value: string): boolean {
@@ -115,7 +115,7 @@ export class CoordinatesService {
     }
   }
 
-  private extractValues(value: string): degreeValues {
+  private extractValuesFromDegrees(value: string): degreeValues {
     const values = value.split(/\D/).filter(part => Boolean(part)).map(v => Number(v))
     return values.concat(Array(3 - values.length).fill(0)) as degreeValues
   }

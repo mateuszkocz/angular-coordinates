@@ -72,6 +72,8 @@ describe('Coordinates library', () => {
 
     it('should transform digits to degrees when "to degrees" transformation is selected', () => {
       setType(TransformationType.ToDegrees)
+      setValue(0)
+      expect(getContent()).toBe(`0°0'0"`)
       setValue(10)
       expect(getContent()).toBe(`10°0'0"`)
       setValue('20.123')
@@ -151,6 +153,21 @@ describe('Coordinates library', () => {
       setValue(-40)
       setDirection(Direction.Longitude)
       expect(getContent()).toBe(`40°0'0" W`)
+    })
+
+    it('should report north and east when transforming to degrees from 0', () => {
+      setValue(0)
+      setDirection(Direction.Latitude)
+      expect(getContent()).toBe(`0°0'0" N`)
+      setValue(0)
+      setDirection(Direction.Longitude)
+      expect(getContent()).toBe(`0°0'0" E`)
+      setValue(-0.000000000001)
+      setDirection(Direction.Latitude)
+      expect(getContent()).toBe(`0°0'0" S`)
+      setValue(-0.000000000001)
+      setDirection(Direction.Longitude)
+      expect(getContent()).toBe(`0°0'0" W`)
     })
 
     it('should not display invalid values', () => {
