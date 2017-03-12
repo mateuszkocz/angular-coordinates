@@ -7,13 +7,17 @@ export class CoordinatesService {
   transform(value: string | number | null, transformationType: TransformationType, direction?: Direction): string
     | number {
 
-    if (!transformationType || !value && value !== 0) {
+    if (!transformationType || !this.isValueValid(value, direction)) {
       return ''
     } else if (transformationType === TransformationType.ToDegrees) {
       return this.transformToDegrees(value, direction)
     } else {
       return this.transformToDigit(value)
     }
+  }
+
+  isValueValid(value: string | number | null, direction?: Direction): boolean {
+    return (!value && value === 0) || this.isValidDigit(value, direction) || this.isValidDegree(value)
   }
 
   transformToDigit(value: string | number): number {

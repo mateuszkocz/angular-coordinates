@@ -171,7 +171,18 @@ describe('Coordinates library', () => {
     })
 
     it('should not display invalid values', () => {
-      // ...
+      setValue(100)
+      setDirection(Direction.Latitude)
+      expect(getContent()).toBe('')
+      setValue(-100)
+      setDirection(Direction.Latitude)
+      expect(getContent()).toBe('')
+      setValue(-200)
+      setDirection(Direction.Longitude)
+      expect(getContent()).toBe('')
+      setValue(-200)
+      setDirection(Direction.Longitude)
+      expect(getContent()).toBe('')
     })
   })
 
