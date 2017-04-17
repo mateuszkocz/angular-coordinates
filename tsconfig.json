@@ -18,7 +18,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es6"],
-    "types": ["jasmine"]
+    "types": ["jasmine", "node", "core-js"]
   },
   "include": ["./src/**/*", "./base.spec", "index.ts"],
   "exclude": ["node_modules", "dist"]

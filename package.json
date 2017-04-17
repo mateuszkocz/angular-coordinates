@@ -17,37 +17,45 @@
   ],
   "author": "Mateusz Kocz",
   "license": "MIT",
-  "peerDependencies": {
-    "@angular/core": "^2.0.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com:mateuszkocz/angular-coordinates.git"
   },
+  "engines": {
+    "node": "7.9.0",
+    "npm": "4.2.0"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=2.0.0 <5.0.0",
+    "@angular/common": ">=2.0.0 <5.0.0"
+  },
   "devDependencies": {
-    "@angular/common": "^2.0.0",
-    "@angular/compiler": "^2.0.0",
-    "@angular/core": "^2.0.0",
-    "@angular/platform-browser": "^2.0.0",
-    "@angular/platform-browser-dynamic": "^2.0.0",
-    "@types/core-js": "^0.9.35",
-    "@types/jasmine": "^2.5.43",
+    "@angular/common": "^2.4.10",
+    "@angular/compiler": "^2.4.10",
+    "@angular/core": "^2.4.10",
+    "@angular/platform-browser": "^2.4.10",
+    "@angular/platform-browser-dynamic": "^2.4.10",
+    "@types/core-js": "^0.9.34",
+    "@types/jasmine": "^2.2.34",
+    "@types/node": "^4.0.22-alpha",
+    "@types/systemjs": "^0.19.32",
+    "core-js": "^2.4.1",
     "jasmine-core": "^2.5.2",
-    "karma": "~1.4.0",
+    "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-firefox-launcher": "^1.0.0",
-    "karma-jasmine": "^1.1.0",
+    "karma-jasmine": "^1.0.2",
     "karma-opera-launcher": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-safari-launcher": "^1.0.0",
-    "karma-typescript": "^2.1.7",
-    "reflect-metadata": "^0.1.9",
-    "rxjs": "^5.1.1",
-    "traceur": "^0.0.111",
-    "tslint": "^4.4.2",
-    "tslint-eslint-rules": "^3.4.0",
-    "tslint-microsoft-contrib": "^4.0.0",
-    "typescript": "^2.1.6",
-    "zone.js": "^0.7.7"
+    "karma-typescript": "^3.0.0",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "^5.0.1",
+    "traceur": "0.0.111",
+    "tslint": "^4.0.2",
+    "tslint-eslint-rules": "^3.0.0",
+    "tslint-microsoft-contrib": "^2.0.13",
+    "typescript": "^2.2.0",
+    "zone.js": "^0.8.5"
   }
 }
