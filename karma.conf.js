@@ -46,7 +46,7 @@ module.exports = function (config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     // TODO: Create another config file with all browsers.
     // TODO: IE and Edge
-    browsers: [
+    browsers: process.env.TRAVIS ? ['PhantomJS', 'Chrome_travis_ci'] : [
       'PhantomJS',
       // 'Chrome',
       // 'ChromeCanary',
@@ -65,6 +65,10 @@ module.exports = function (config) {
           '--window-size=400,400',
           '--window-position=-400,0'
         ]
+      },
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
       }
     },
 
