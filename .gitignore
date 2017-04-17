@@ -11,7 +11,8 @@ node_modules
 /src/index.spec.js
 /coverage/
 
-*.js
+src/*.js
+index.js
 *.js.map
 *.d.ts
 npm-debug.log
