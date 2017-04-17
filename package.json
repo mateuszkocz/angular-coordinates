@@ -4,7 +4,7 @@
   "description": "Angular component, pipe and service for transforming geolocation coordinates",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --single-run",
+    "test": "npm run lint && node --max-old-space-size=4096 node_modules/karma/bin/karma start --single-run",
     "lint": "./node_modules/tslint/bin/tslint --type-check --project ./tsconfig.json --config ./tslint.json",
     "unit": "node --max-old-space-size=4096 node_modules/karma/bin/karma start",
     "build": "./node_modules/typescript/bin/tsc",
