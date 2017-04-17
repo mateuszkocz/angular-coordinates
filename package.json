@@ -1,6 +1,6 @@
 {
   "name": "angular-coordinates",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Angular component, pipe and service for transforming geolocation coordinates",
   "main": "index.js",
   "scripts": {
