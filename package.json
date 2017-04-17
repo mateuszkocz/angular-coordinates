@@ -7,7 +7,8 @@
     "test": "npm run lint && node --max-old-space-size=4096 node_modules/karma/bin/karma start --single-run",
     "lint": "./node_modules/tslint/bin/tslint --type-check --project ./tsconfig.json --config ./tslint.json",
     "unit": "node --max-old-space-size=4096 node_modules/karma/bin/karma start",
-    "build": "./node_modules/typescript/bin/tsc",
+    "build": "npm run compile",
+    "compile": "ngc",
     "prepublish": "npm run build"
   },
   "keywords": [
@@ -26,15 +27,12 @@
     "npm": "4.2.0"
   },
   "peerDependencies": {
-    "@angular/core": ">=2.0.0 <5.0.0",
-    "@angular/common": ">=2.0.0 <5.0.0"
+    "@angular/core": ">=2.0.0 <5.0.0"
   },
   "devDependencies": {
-    "@angular/common": "^2.4.10",
-    "@angular/compiler": "^2.4.10",
-    "@angular/core": "^2.4.10",
-    "@angular/platform-browser": "^2.4.10",
-    "@angular/platform-browser-dynamic": "^2.4.10",
+    "@angular/compiler": "^4.0.2",
+    "@angular/compiler-cli": "^4.0.2",
+    "@angular/core": "^4.0.2",
     "@types/core-js": "^0.9.34",
     "@types/jasmine": "^2.2.34",
     "@types/node": "^4.0.22-alpha",

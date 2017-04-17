@@ -3,11 +3,9 @@ import {CoordinatesService} from './coordinates.service'
 import {CoordinatesComponent} from './coordinates.component'
 import {CoordinatesPipe} from './coordinates.pipe'
 
-const declarations = [CoordinatesComponent, CoordinatesPipe]
-
 @NgModule({
   providers: [CoordinatesService],
-  exports: [...declarations],
-  declarations: [...declarations]
+  exports: [CoordinatesComponent, CoordinatesPipe],
+  declarations: [CoordinatesComponent, CoordinatesPipe]
 })
 export class CoordinatesModule {}

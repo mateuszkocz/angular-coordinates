@@ -17,3 +17,6 @@ index.js
 *.d.ts
 npm-debug.log
 /lcov.info
+*.metadata.json
+*.ngfactory.ts
+*.ngsummary.json
