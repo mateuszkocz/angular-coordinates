@@ -2,7 +2,6 @@
 !*.d.ts
 !*.ngfactory.ts
 *.spec.*
-src/ngFactory
 
 .idea
 coverage
